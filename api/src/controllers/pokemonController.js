@@ -39,12 +39,13 @@ const getAllPokeController = async () => {
     );
     return pokeData.filter((pokemon) => pokemon !== null);  //q me retorne esa data de aquel pokemon que exista, que no sea null
   } catch (error) {
-    throw new Error("Error al obtener todos los pokemons desde la API");
+    throw new Error("Error al obtener todos los pokemons desde api");
   }
 };
 
 const getPokeNameController = async (name) => {
-  return `Devuelve el pokemon con el name : ${name}`;
+    const pokeName = ( await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data
+  return pokeName
 };
 const getPokeIdController = async (id, source) => {
   if (source === "dbb") {
