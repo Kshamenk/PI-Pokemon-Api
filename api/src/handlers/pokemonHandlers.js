@@ -13,7 +13,7 @@ const allPokemonHandler = async (req,res) =>{
 }
 const pokemonIdHandler = async (req,res) =>{
  const {id} = req.params;
- const source = isNaN(id) ? "dbb" : "api"
+ const {source} = isNaN(id) ? "dbb" : "api"
  try {
     const result = await getPokeIdController(id, source);
     res.status(200).json(result);
