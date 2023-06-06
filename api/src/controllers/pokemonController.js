@@ -31,7 +31,10 @@ const clearData = (arr) =>
     }
   })
 
+
+ var pokeCache 
 const getAllPokeController = async () => {
+  if (pokeCache) return pokeCache
   //traer desde dbb
   const pokemonDbb = await Pokemon.findAll()
   // traer desde la api
@@ -43,8 +46,8 @@ const getAllPokeController = async () => {
   const result3 = await Promise.all(result2)
   const result4 = result3.map((e) => e.data)
   const pokeAll = clearData(result4)
-    //en donde concatenamos los dos arr   //por name. y hacer los Get del type modelo
-    return [...pokemonDbb,...pokeAll]
+  pokeCache = [...pokemonDbb,...pokeAll]
+    return  pokeCache
 };
 
 const getPokeNameController = async (name) => {
