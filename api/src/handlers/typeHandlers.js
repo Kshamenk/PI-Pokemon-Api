@@ -6,7 +6,7 @@ const getAllTypesHandler = async (req,res) => {
         const result = await getTypeController()
         res.status(200).json(result)
     } catch (error) {
-        res.send('No se pudieron traer todos los types')
+        res.status(404).json({ error: error.message })
     }
 }
 
