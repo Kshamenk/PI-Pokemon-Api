@@ -12,7 +12,6 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
     hp: {
       type: DataTypes.INTEGER,
@@ -32,7 +31,16 @@ module.exports = (sequelize) => {
     },
     weight: {
       type: DataTypes.INTEGER,
-      allowNull: false
+    },
+    types: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
+    image: {
+      type: DataTypes.STRING,
+    },
+    created: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
-  }, {timestamps: false});
+  }, { timestamps: false });
 };

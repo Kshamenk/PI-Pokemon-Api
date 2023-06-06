@@ -1,4 +1,5 @@
 const axios = require("axios");
+const {Pokemon} = require("../db");
 
 // //   const allPokemon = (
 // //     await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10")
@@ -12,50 +13,63 @@ const axios = require("axios");
 // //     return additionalData;
 //   });
 
+
+const clearData = (arr) =>
+  arr.map((e) => {
+    return {
+      id: e.id,
+      name: e.name,
+      hp: e.stats[0].base_stat,
+      attack: e.stats[1].base_stat,
+      defense: e.stats[2].base_stat,
+      speed: e.stats[5].base_stat,
+      height: e.height,
+      weight: e.weight,
+      types: e.types.map((e) => e.type.name),
+      image: e.sprites.other.dream_world.front_default,
+      created: false
+    }
+  })
+
 const getAllPokeController = async () => {
-  try {
-    const response = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=10"
-    );
-    const results = response.data.results;
-    //con promise all concateno la siguientes promises
-    const pokeData = await Promise.all(
-      results.map(async (pokemon) => {
-        try {
-          const name = pokemon.name; // array? Map.
-          const url = pokemon.url;
-
-          const pokemonResponse = await axios.get(url); //aca pido la url de respuesta, me permite ingreasr a los siguientes niveles
-          const pokemonData = pokemonResponse.data;
-
-          const weight = pokemonData.weight;
-
-          return { name, weight };
-        } catch (error) {
-          console.error("Error al obtener datos del pokemon:", error);
-          return null; // manejar el error de otra manera. Me lo robo.
-        }
-      })
-    );
-    return pokeData.filter((pokemon) => pokemon !== null);  //q me retorne esa data de aquel pokemon que exista, que no sea null
-  } catch (error) {
-    throw new Error("Error al obtener todos los pokemons desde api");
-  }
+  //traer desde dbb
+  const pokemonDbb = await Pokemon.findAll()
+  // traer desde la api
+  const response = await axios.get(
+    "https://pokeapi.co/api/v2/pokemon?limit=120"
+  );
+  const results = response.data.results;
+  const result2 = results.map((e) => axios.get(e.url))
+  const result3 = await Promise.all(result2)
+  const result4 = result3.map((e) => e.data)
+  const pokeAll = clearData(result4)
+    //en donde concatenamos los dos arr   //por name. y hacer los Get del type modelo
+    return [...pokemonDbb,...pokeAll]
 };
 
 const getPokeNameController = async (name) => {
-    const pokeName = ( await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data
-  return pokeName
+  //
+  const pokeName = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)).data
+  const pokeClear = clearData([pokeName])
+  return pokeClear
 };
+
 const getPokeIdController = async (id, source) => {
+  console.log(source)
   if (source === "dbb") {
-    return `Devuelve el pokemon con el name : ${id} desde dbb`;
+    const pokeDb = await Pokemon.findByPk(id)
+    return pokeDb
   } else {
-    return `Devuelve el pokemon con el name : ${id} desde api`;
+    const pokeId = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)).data
+    const pokeClear = clearData([pokeId])
+    return pokeClear
   }
 };
-const createPokeController = async ({ name }) => {
-  return `Crea un pokemon con el name : ${name}`;
+const createPokeController = async  (name, hp, attack, defense, speed, height, weight, types, image) => {
+  const newPoke = await Pokemon.create(name, hp, attack, defense, speed, height, weight,types, image)
+  return newPoke
+  
+  
 };
 
 module.exports = {
