@@ -73,6 +73,9 @@ const createPokeController = async (dataBody) => {
   return newPoke;
 };
 
+
+//poder darle a ese ID de Types, una significacion a traves de variables
+
 module.exports = {
   getAllPokeController,
   getPokeNameController,
