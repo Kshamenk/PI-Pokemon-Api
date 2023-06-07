@@ -1,17 +1,5 @@
 const axios = require("axios");
-const { Pokemon } = require("../db");
-
-// //   const allPokemon = (
-// //     await axios.get("https://pokeapi.co/api/v2/pokemon?limit=10")
-// //   ).data;
-// //   const allPokemon1 = (await allPokemon).results;
-
-// //   const additionalData = allPokemon1.map((pokemon) => {
-
-// //     const name = pokemon.name;
-// //     const url = pokemon.url;
-// //     return additionalData;
-//   });
+const { Pokemon, Type } = require("../db");
 
 const clearData = (arr) =>
   arr.map((e) => {
@@ -37,7 +25,7 @@ const getAllPokeController = async () => {
   const pokemonDbb = await Pokemon.findAll();
   // traer desde la api
   const response = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon?limit=120"
+    "https://pokeapi.co/api/v2/pokemon?limit=20"
   );
   const results = response.data.results;
   const result2 = results.map((e) => axios.get(e.url));
@@ -48,16 +36,24 @@ const getAllPokeController = async () => {
   return pokeCache;
 };
 
+
 const getPokeNameController = async (name) => {
-  const pokeName = (
-    await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-  ).data;
-  const pokeClear = clearData([pokeName]);
-  return pokeClear;
+  const allPokemon = await getAllPokeController()   // muy piola
+  const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
+  return pokeName
+
+  //trae pokemon por name desde la api
+  // const pokeName = (
+  //   await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+  // ).data;
+  // const pokeClear = clearData([pokeName]);
+  //trae poekmon por name desde Dbb
+  // const pokeDbbName = await Pokemon.findAll({where: { name:name }})
+  // console.log(pokeDbbName)  
 };
 
 const getPokeIdController = async (id, source) => {
-  console.log(source);
+
   if (source === "dbb") {
     const pokeDb = await Pokemon.findByPk(id);
     return pokeDb;
@@ -68,28 +64,12 @@ const getPokeIdController = async (id, source) => {
     return pokeClear;
   }
 };
-const createPokeController = async (
-  name,
-  hp,
-  attack,
-  defense,
-  speed,
-  height,
-  weight,
-  types,
-  image
-) => {
-  const newPoke = await Pokemon.create(
-    name,
-    hp,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    types,
-    image
-  );
+
+const createPokeController = async (dataBody) => {
+  const { name, hp, attack, defense, speed, height, weight, types, image } = dataBody
+  const newPoke = await Pokemon.create({ name, hp, attack, defense, speed, height, weight, types, image });
+  const typesDbb = await Type.findAll({ where: { name: types } })
+  newPoke.addType(typesDbb) //aca relacionamos la tabla intermedia PokemonTypes...
   return newPoke;
 };
 

@@ -22,9 +22,10 @@ const pokemonIdHandler = async (req, res) => {
     }
 }
 const pokemonCreateHandler = async (req, res) => {
-    const { name, hp, attack, defense, speed, height, weight,types, image } = req.body;
+    //const { name, hp, attack, defense, speed, height, weight,types, image } = req.body;
+    const dataBody = req.body;
     try {
-        const result = await createPokeController({ name, hp, attack, defense, speed, height, weight, types, image })
+        const result = await createPokeController(dataBody)
         res.status(201).json(result)
     } catch (error) {
         res.status(404).json({ error: error.message });
