@@ -1,4 +1,4 @@
-// import { useEffect, useState } from 'react';
+import style from './Detail.module.css'
 // import { useDispatch , useSelector} from 'react-redux';
 
 export default function Detail() {
