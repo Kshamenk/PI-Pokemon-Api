@@ -1,16 +1,24 @@
   import style from './Home.module.css'
-  import { Aside, CardsContainer, Filters, Footer, Orders, Paginate, SearchBar } from '../index'
+  import { Aside, CardsContainer,  Footer, Paginate, SearchBar } from '../index'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { getAllPokemons } from '../../redux/actions';
 
   export default function Home() {
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+      dispatch(getAllPokemons())
+    },[dispatch])
+
+
+
   return (
     <div className={style.container}>
-      <h1>Home</h1>
       <SearchBar/>
+      <Paginate/>
       <CardsContainer/>
       <Aside/>
-      <Orders/>
-      <Filters/>
-      <Paginate/>
       <Footer/>
     </div>
   );

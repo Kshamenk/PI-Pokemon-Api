@@ -11,6 +11,8 @@ import Orders from './Orders/Orders'
 import Filters from './Filters/Filters'
 import Paginate from './Paginate/Paginate'
 import Footer from './Footer/Footer'
+
+
 export  {
     Home, CardsContainer, Aside, Form, LandingPage, Nav, Detail, SearchBar, Card, Orders, Filters, Paginate, Footer
 
