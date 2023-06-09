@@ -2,7 +2,7 @@
   import { Aside, CardsContainer,  Footer, Paginate, SearchBar } from '../index'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux'
-import { getAllPokemons } from '../../redux/actions';
+import { getAllPokemons, getAllTpyes  } from '../../redux/actions';
 
   export default function Home() {
     const dispatch = useDispatch()
@@ -11,6 +11,10 @@ import { getAllPokemons } from '../../redux/actions';
       dispatch(getAllPokemons())
     },[dispatch])
 
+    
+  useEffect(()=>{
+    dispatch(getAllTpyes())
+  },[dispatch])
 
 
   return (
