@@ -65,7 +65,7 @@ export default function Form() {
       types: []
     })
   }
-//click A CAR, QUE ME MANDE A DETAIL ID CON EL ID DE ESA CARD... PRIMERO 
+
   return (
     <div className={style.container}>
       <form onSubmit={handlerSubmit} >

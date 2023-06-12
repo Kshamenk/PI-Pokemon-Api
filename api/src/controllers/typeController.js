@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Type } = require('../db')
+const { Type } = require("../db");
 
 //Solo para traer. easy stuff
 // const getTypeController = async () => {
@@ -11,36 +11,18 @@ const { Type } = require('../db')
 // }
 
 const getTypeController = async () => {
-    const response = await axios.get("https://pokeapi.co/api/v2/type");
-    
-     const types = response.data.results 
-     types.map( (e)=> {
-        Type.findOrCreate({
-            where: {name : e.name}
-        })
-     })
-     return await Type.findAll() 
+  const response = await axios.get("https://pokeapi.co/api/v2/type");
 
-    // const createdTypes = await Type.findOrCreate(types.map((name) => ({ name }))); // Guarda los tipos en la base de datos
-    
-    // return await Type.findAll()
-    //return createdTypes.map((type) => type.name); // Devuelve los nombres de los tipos creados
+  const types = response.data.results;
+
+  types.map((e) => {
+    Type.findOrCreate({
+      where: { name: e.name },
+    });
+  });
+  return await Type.findAll();
 };
 
-// const getTypeController = async () => {
-//     const response = await axios.get("https://pokeapi.co/api/v2/type");
-//     const types = response.data.results.map((e) => e.name);
-
-//     const createdTypes = [];
-
-//     for (const name of types) {
-//       const createdType = await Type.create({ name });
-//       createdTypes.push(createdType.name);
-//     }
-
-//     return createdTypes;
-//   };
-
 module.exports = {
-    getTypeController
-}
+  getTypeController,
+};

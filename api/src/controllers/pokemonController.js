@@ -25,7 +25,7 @@ const getAllPokeController = async () => {
   const pokemonDbb = await Pokemon.findAll();
   // traer desde la api
   const response = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon?limit=20"
+    "https://pokeapi.co/api/v2/pokemon?limit=50"
   );
   const results = response.data.results;
   const result2 = results.map((e) => axios.get(e.url));
@@ -70,7 +70,7 @@ const createPokeController = async (dataBody) => {
   const newPoke = await Pokemon.create({ name, hp, attack, defense, speed, height, weight, types, image });
   const typesDbb = await Type.findAll({ where: { name: types } })
   newPoke.addType(typesDbb) //aca relacionamos la tabla intermedia PokemonTypes...
-  return newPoke;
+  return await newPoke;
 };
 
 
