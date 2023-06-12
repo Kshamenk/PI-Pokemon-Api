@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Form.module.css';
 import { getAllTpyes } from '../../redux/actions';
+import axios from 'axios';
 
 
 export default function Form() {
@@ -39,18 +40,35 @@ export default function Form() {
     })
   }
 
-  const handlerDelete = (event, type) => {
+  const handlerDelete = (type, event) => {
     event.preventDefault()
-    console.log(type)
     setInput({
       ...input,
-      types: input.types.filter(e => e !== e.type)
+      types: input.types.filter(e => e !== type)
     })
   }
 
+  const handlerSubmit = (event) =>{
+    //todos los submit necesitan un prevDefault
+    event.preventDefault()
+   axios.post("http://localhost:3001/pokemons", input)
+    alert("Personaje creado")
+    setInput({
+      name: "",
+      hp: "",
+      attack: "",
+      defense: "",
+      height: "",
+      weight: "",
+      speed: "",
+      image: "",
+      types: []
+    })
+  }
+//click A CAR, QUE ME MANDE A DETAIL ID CON EL ID DE ESA CARD... PRIMERO 
   return (
     <div className={style.container}>
-      <form>
+      <form onSubmit={handlerSubmit} >
         <div>
           <label htmlFor="name">Name: </label>
           <input type="text" name="name" value={input.name} onChange={handleInputChange} />
@@ -98,11 +116,12 @@ export default function Form() {
             return (
               <div>
                 <span>{type} </span>
-                <button onClick={(event) => handlerDelete(event, { type })}> x</button>
+                <button onClick={(event) => handlerDelete(type, event)}> x</button>
               </div>
             )
           })}
         </div>
+        <button>Crear! </button>
       </form>
     </div>
   );

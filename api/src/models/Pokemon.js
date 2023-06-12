@@ -37,6 +37,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
+      defaultValue : "https://www.svgrepo.com/show/276264/pokeball-pokemon.svg"
     },
     created: {
       type: DataTypes.BOOLEAN,
