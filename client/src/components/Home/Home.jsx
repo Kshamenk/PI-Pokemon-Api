@@ -12,7 +12,6 @@ import { getAllPokemons } from '../../redux/actions';
     },[dispatch])
 
 
-
   return (
     <div className={style.container}>
       <SearchBar/>
