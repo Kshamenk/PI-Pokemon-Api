@@ -1,18 +1,28 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './Form.module.css';
+import { getAllTpyes } from '../../redux/actions';
 
 
 export default function Form() {
-  const pokemonTypes = useSelector(state => state.pokemonTypes);
+  const dispatch = useDispatch()
+  const types = useSelector(state => state.pokemonTypes)
 
+  useEffect(() => {
+    dispatch(getAllTpyes())
+  }, [dispatch])
 
   const [input, setInput] = useState({
     name: "",
     hp: "",
+    attack: "",
+    defense: "",
+    height: "",
+    weight: "",
+    speed: "",
+    image: "",
     types: []
   });
-
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,110 +32,81 @@ export default function Form() {
     });
   };
 
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    let updatedTypes = [...input.types];
-
-    if (checked) {
-      updatedTypes.push(value);
-    } else {
-      updatedTypes = updatedTypes.filter(type => type !== value);
-    }
-
+  const handlerTypes = (event) => {
     setInput({
       ...input,
-      types: updatedTypes
-    });
-  };
+      types: [...input.types, event.target.value]
+    })
+  }
+
+  const handlerDelete = (event, type) => {
+    event.preventDefault()
+    console.log(type)
+    setInput({
+      ...input,
+      types: input.types.filter(e => e !== e.type)
+    })
+  }
 
   return (
     <div className={style.container}>
       <form>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name: </label>
           <input type="text" name="name" value={input.name} onChange={handleInputChange} />
         </div>
         <div>
-          <label htmlFor="image">Image:</label>
-          <input type="text" name="image" />
+          <label htmlFor="image">Image: </label>
+          <input type="text" name="image" value={input.image} onChange={handleInputChange} />
         </div>
         <div>
-          <label htmlFor="height">Height:</label>
-          <input type="number" name="height" />
+          <label htmlFor="height">Height: </label>
+          <input type="number" name="height" value={input.height} onChange={handleInputChange} />
         </div>
         <div>
-          <label htmlFor="hp">Hp:</label>
+          <label htmlFor="weight">Weight: </label>
+          <input type="number" name="weight" value={input.weight} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label htmlFor="hp">Hp: </label>
           <input type="range" id="hp" name="hp" min="0" max="100" value={input.hp} onChange={handleInputChange} />
         </div>
         <div>
-          <label>Types:</label>
-          {pokemonTypes.map(type => (
-            <label key={type}>
-              <input
-                type="checkbox"
-                name={type}
-                value={input.types}
-                checked={input.types.includes(type)}
-                onChange={handleCheckboxChange}
-              />
-              {type}
-            </label>
-          ))}
+          <label htmlFor="attack">Attack: </label>
+          <input type="range" id="attack" name="attack" value={input.attack} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label htmlFor="defense">Defense: </label>
+          <input type="range" name="defense" value={input.defense} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label htmlFor="speed">Speed: </label>
+          <input type="range" name="speed" value={input.speed} onChange={handleInputChange} />
+        </div>
+        <div>
+          <label htmlFor="types">Types: </label>
+          <select name="types" id="types" value={input.types} onChange={handlerTypes}>
+            {
+              types.map((type, index) => {
+                return (
+                  <option value={type.name} key={index} >{type.name}</option>
+                )
+              })
+            }
+          </select>
+          {input.types.map((type) => {
+            return (
+              <div>
+                <span>{type} </span>
+                <button onClick={(event) => handlerDelete(event, { type })}> x</button>
+              </div>
+            )
+          })}
         </div>
       </form>
     </div>
   );
 }
-
-
-
-
-
-// import { useState } from 'react';
-
-// import style from './Form.module.css'
-
-
-// export default function Form() {
-
-//   const [input, setInput] = useState({
-//     name: "",
-//     hp: "",
-
-//   })
-//   const handlerChange = (event) => {
-//     const property = event.target.name
-//     const value = event.target.value
-//     setInput({
-//       ...input,
-//       [property]: value
-//     })
-//   }
-
-//   return (
-//     <div className={style.container}>
-//       <form action="">
-//         <div>
-//           <label htmlFor="name">Name: </label>
-//           <input type="text" name='name' value={input.name} onChange={handlerChange} />
-//         </div>
-//         <div>
-//           <label htmlFor="image">Imagen: </label>
-//           <input type="text" name='image' />
-//         </div>
-//         <div>
-//           <label htmlFor="height">Height:  </label>
-//           <input type="number" name='height' />
-//         </div>
-//         <div>
-//           <label htmlFor="hp">Hp </label>
-//           <input type="range" id="hp" name="hp" min="0" max="100" value={input.hp} onChange={handlerChange} ></input>
-//         </div>
-        
-//       </form>
-//     </div>
-//   );
-// }
 
   //buscar todo lo que tengo que pasar   { attack, defense, speed, height, weight, types }
   //types del estado global. // Si debo crear una nueva accion... suscribirla al form
@@ -138,4 +119,3 @@ export default function Form() {
 
   //checkpoint ayuda= tomar y ver valores. //no validar nada, pensar las cosas.
 
-  
