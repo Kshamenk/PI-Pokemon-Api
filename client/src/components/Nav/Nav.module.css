@@ -1,3 +1,32 @@
-.container{
-    background-color: blueviolet;
-}
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: #6e0f08; /* Color de fondo inspirado en Pokémon */
+    padding: 10px;
+  }
+  
+  .container a {
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .container button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .container button:hover {
+    color: #ffd700; /* Color de texto al pasar el cursor inspirado en Pokémon */
+  }
+  
+  
+  
+  
+  
+  
+  
