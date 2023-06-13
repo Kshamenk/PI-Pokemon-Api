@@ -1,3 +1,69 @@
 .container {
-    background-color: antiquewhite;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 20px;
+    background-color: #f5f5f5; /* Color de fondo */
+    border-radius: 5px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 3px;
+  }
+  
+  input[type="range"] {
+    width: 100%;
+  }
+  
+  button {
+    background-color: #f44336; /* Color de fondo del botón inspirado en Pokémon */
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ffd700; /* Color de fondo del botón al pasar el cursor inspirado en Pokémon */
+  }
+  
+  .types-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .types-container span {
+    margin-right: 5px;
+  }
+  
+  .types-container button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .types-container button:hover {
+    background-color: #ffd700;
+  }
