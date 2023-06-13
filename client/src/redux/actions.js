@@ -21,7 +21,7 @@ export const getAllTpyes = () => {
 export const getPokemonById = (id) => {
     return async function (dispatch) {
         const pokemon = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data
-        console.log(pokemon)   //.data?
+           //.data?
         dispatch({type: GET_POKEMON_BY_ID, payload: pokemon})
     }
 }
