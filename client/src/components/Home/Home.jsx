@@ -1,15 +1,28 @@
 import style from "./Home.module.css";
 import { Aside, CardsContainer, Footer, Paginate, SearchBar } from "../index";
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { getAllPokemons } from "../../redux/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
+
+  // const [input, setInput] = useState('')
+
+  // const handlerChange = (event) => {
+  //   const value = event.target.value
+  //   setInput(value)
+  // }
+
+  // const handlerSubmit = (event) => {
+  //   event.preventDefault()
+  //   dispatch(pokemonByName(input))
+  // }
 
   return (
     <div className={style.container}>
