@@ -39,12 +39,19 @@ const getAllPokeController = async () => {
 };
 
 
-const getPokeNameController = async (name) => {
-  const allPokemon = await getAllPokeController()
-  const pokeName = allPokemon.filter( (e)=> (e.name.includes(name)) && e.name.toLowerCase() == name.toLowerCase() )
-  //const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
-  return pokeName
+// const getPokeNameController = async (name) => {
+//   const allPokemon = await getAllPokeController()
+//   const pokeName = allPokemon.filter( (e)=> (e.name.includes(name)) && e.name.toLowerCase() == name.toLowerCase() )
+//   //const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
+//   return pokeName
  
+// };
+const getPokeNameController = async (name) => {
+  const allPokemon = await getAllPokeController();
+  const pokeName = allPokemon.filter((e) =>
+    e.name.toLowerCase().includes(name.toLowerCase())
+  );
+  return pokeName;
 };
 
 const getPokeIdController = async (id, source) => {
