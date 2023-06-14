@@ -1,5 +1,6 @@
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
+const { Op } = require("sequelize");
 
 const clearData = (arr) =>
   arr.map((e) => {
@@ -32,24 +33,18 @@ const getAllPokeController = async () => {
   const result3 = await Promise.all(result2);
   const result4 = result3.map((e) => e.data);
   const pokeAll = clearData(result4);
+  //aca concatenamos las dos 
   pokeCache = [...pokemonDbb, ...pokeAll];
   return pokeCache;
 };
 
 
 const getPokeNameController = async (name) => {
-  const allPokemon = await getAllPokeController()   // muy piola
-  const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
+  const allPokemon = await getAllPokeController()
+  const pokeName = allPokemon.filter( (e)=> (e.name.includes(name)) && e.name.toLowerCase() == name.toLowerCase() )
+  //const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
   return pokeName
-
-  //trae pokemon por name desde la api
-  // const pokeName = (
-  //   await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-  // ).data;
-  // const pokeClear = clearData([pokeName]);
-  //trae poekmon por name desde Dbb
-  // const pokeDbbName = await Pokemon.findAll({where: { name:name }})
-  // console.log(pokeDbbName)  
+ 
 };
 
 const getPokeIdController = async (id, source) => {

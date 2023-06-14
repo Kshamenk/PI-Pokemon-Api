@@ -30,7 +30,6 @@ export const getPokemonById = (id) => {
 export const getPokemonByName = (name) => {
     return async function (dispatch) {
         const pokemon = (await axios.get(`http://localhost:3001/pokemons/?name=${name}`)).data
-        console.log(pokemon)
         dispatch({type:GET_POKEMON_BY_NAME, payload: pokemon})
     }
 }

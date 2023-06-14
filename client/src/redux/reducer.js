@@ -4,8 +4,7 @@ const initialState = {
   allPokemons: [],
   allPokemonsCopy: [],
   pokemonTypes: [],
-  pokemonById: [],
-  pokemonByName: []
+  pokemonById: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -29,7 +28,7 @@ export default function reducer(state = initialState, action) {
       case GET_POKEMON_BY_NAME:
         return {
           ...state,
-          pokemonByName: action.payload,
+          allPokemons: action.payload,
         };
     default:
       return { ...state };
