@@ -4,13 +4,23 @@ export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS"
 export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID"
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME"
 export const GET_ALL_TYPES = "GET_ALL_TYPES"
-
+export const GET_POKE_CREATED = "GET_POKE_CREATED"
 export const getAllPokemons = () => {
     return async function (dispatch) {
         const pokemons = (await axios.get("http://localhost:3001/pokemons")).data
         dispatch({ type: GET_ALL_POKEMONS, payload: pokemons })
     }
 };
+
+ export const getPokeCreated = (created) => {
+    return async function (dispatch) {
+        const pokemons = (await axios.get("http://localhost:3001/pokemons")).data
+        const pokeFilter = pokemons.filter((e) => e.created === created)
+        console.log(pokeFilter)
+        dispatch({ type: GET_POKE_CREATED, payload: pokeFilter })
+    }
+}
+
 
 export const getAllTpyes = () => {
     return async function (dispatch) {
@@ -22,14 +32,13 @@ export const getAllTpyes = () => {
 export const getPokemonById = (id) => {
     return async function (dispatch) {
         const pokemon = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data
-           //.data?
-        dispatch({type: GET_POKEMON_BY_ID, payload: pokemon})
+        dispatch({ type: GET_POKEMON_BY_ID, payload: pokemon })
     }
 }
 
 export const getPokemonByName = (name) => {
     return async function (dispatch) {
         const pokemon = (await axios.get(`http://localhost:3001/pokemons/?name=${name}`)).data
-        dispatch({type:GET_POKEMON_BY_NAME, payload: pokemon})
+        dispatch({ type: GET_POKEMON_BY_NAME, payload: pokemon })
     }
 }
