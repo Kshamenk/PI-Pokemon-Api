@@ -4,7 +4,7 @@ import {
   GET_POKEMON_BY_ID,
   GET_POKEMON_BY_NAME,
   GET_POKE_CREATED,
-  GET_POKE_SOURCE
+
 } from "./actions";
 
 const initialState = {
