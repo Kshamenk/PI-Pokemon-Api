@@ -1,10 +1,17 @@
-import { GET_ALL_POKEMONS, GET_ALL_TYPES, GET_POKEMON_BY_ID,GET_POKEMON_BY_NAME,GET_POKE_CREATED} from "./actions";
+import {
+  GET_ALL_POKEMONS,
+  GET_ALL_TYPES,
+  GET_POKEMON_BY_ID,
+  GET_POKEMON_BY_NAME,
+  GET_POKE_CREATED,
+  GET_POKE_SOURCE
+} from "./actions";
 
 const initialState = {
   allPokemons: [],
   allPokemonsCopy: [],
   pokemonTypes: [],
-  pokemonById: []
+  pokemonById: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -20,21 +27,26 @@ export default function reducer(state = initialState, action) {
         ...state,
         pokemonTypes: action.payload,
       };
-      case GET_POKEMON_BY_ID:
+    case GET_POKEMON_BY_ID:
       return {
         ...state,
         pokemonById: action.payload,
       };
-      case GET_POKEMON_BY_NAME:
-        return {
-          ...state,
-          allPokemons: action.payload,
-        };
-        case GET_POKE_CREATED:
-        return {
-          ...state,
-          allPokemons: action.payload,
-        };
+    case GET_POKEMON_BY_NAME:
+      return {
+        ...state,
+        allPokemons: action.payload,
+      };
+    case GET_POKE_CREATED:
+      return {
+        ...state,
+        allPokemons: action.payload,
+      };
+    // case GET_POKE_SOURCE:
+    //   return {
+    //     ...state,
+    //     allPokemons: action.payload,
+    //   };
     default:
       return { ...state };
   }
