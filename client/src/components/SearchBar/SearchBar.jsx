@@ -11,7 +11,7 @@ export default function SearchBar() {
     const allPokemons = useSelector((state) => state.allPokemons)
 
 
-    const handlerImputChange = (e) => {
+    const handlerInputChange = (e) => {
         setInput(e.target.value)
 
     }
@@ -44,7 +44,7 @@ export default function SearchBar() {
     return (
         <div className={style.container}>
             <form >
-                <input type="text" value={input} onChange={handlerImputChange} />
+                <input type="text" value={input} onChange={handlerInputChange} />
                 {
                     flag ?
                         <button onClick={handleSubmit} type="submit">Buscar</button> :

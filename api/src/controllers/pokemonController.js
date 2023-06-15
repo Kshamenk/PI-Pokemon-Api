@@ -19,11 +19,14 @@ const clearData = (arr) =>
     };
   });
 
-var pokeCache;
+var pokeAll = [];
+var pokemonDbb = [];
 const getAllPokeController = async () => {
-  if (pokeCache) return pokeCache;
   //traer desde dbb
-  const pokemonDbb = await Pokemon.findAll();
+  pokemonDbb = await Pokemon.findAll();
+  if (pokeAll.length > 0) {
+     return [...pokemonDbb, ...pokeAll];
+   };
   // traer desde la api
   const response = await axios.get(
     "https://pokeapi.co/api/v2/pokemon?limit=50"
@@ -32,20 +35,12 @@ const getAllPokeController = async () => {
   const result2 = results.map((e) => axios.get(e.url));
   const result3 = await Promise.all(result2);
   const result4 = result3.map((e) => e.data);
-  const pokeAll = clearData(result4);
+  pokeAll = clearData(result4);
   //aca concatenamos las dos 
-  pokeCache = [...pokemonDbb, ...pokeAll];
-  return pokeCache;
+  return [...pokemonDbb, ...pokeAll];
 };
 
 
-// const getPokeNameController = async (name) => {
-//   const allPokemon = await getAllPokeController()
-//   const pokeName = allPokemon.filter( (e)=> (e.name.includes(name)) && e.name.toLowerCase() == name.toLowerCase() )
-//   //const pokeName = await allPokemon.filter((e) => e.name.toLowerCase() == name.toLowerCase())
-//   return pokeName
- 
-// };
 const getPokeNameController = async (name) => {
   const allPokemon = await getAllPokeController();
   const pokeName = allPokemon.filter((e) =>
@@ -68,6 +63,12 @@ const getPokeIdController = async (id, source) => {
 };
 
 const createPokeController = async (dataBody) => {
+  dataBody.hp = parseInt(dataBody.hp) || 40;
+  dataBody.attack = parseInt(dataBody.attack) || 40;
+  dataBody.defense = parseInt(dataBody.defense) || 40;
+  dataBody.speed = parseInt(dataBody.speed) || 40;
+  dataBody.weight = parseInt(dataBody.weight) || 40;
+  dataBody.height = parseInt(dataBody.height) || 40;
   const { name, hp, attack, defense, speed, height, weight, types, image } = dataBody
   const newPoke = await Pokemon.create({ name, hp, attack, defense, speed, height, weight, types, image });
   const typesDbb = await Type.findAll({ where: { name: types } })
@@ -75,12 +76,10 @@ const createPokeController = async (dataBody) => {
   return await newPoke;
 };
 
-
-//poder darle a ese ID de Types, una significacion a traves de variables
-
 module.exports = {
   getAllPokeController,
   getPokeNameController,
   getPokeIdController,
   createPokeController,
 };
+

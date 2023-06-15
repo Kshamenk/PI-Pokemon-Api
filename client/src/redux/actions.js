@@ -5,6 +5,9 @@ export const GET_POKEMON_BY_ID = "GET_POKEMON_BY_ID"
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME"
 export const GET_ALL_TYPES = "GET_ALL_TYPES"
 export const GET_POKE_CREATED = "GET_POKE_CREATED"
+
+
+
 export const getAllPokemons = () => {
     return async function (dispatch) {
         const pokemons = (await axios.get("http://localhost:3001/pokemons")).data

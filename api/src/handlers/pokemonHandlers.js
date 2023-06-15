@@ -4,6 +4,7 @@ const { getPokeNameController, getAllPokeController, getPokeIdController, create
 
 const allPokemonHandler = async (req, res) => {
     const { name } = req.query;
+    console.log("Pidiendo todos los pokemones")
     try {
         const result = name ? await getPokeNameController(name) : await getAllPokeController()
         res.status(200).json(result);
@@ -28,6 +29,7 @@ const pokemonCreateHandler = async (req, res) => {
         const result = await createPokeController(dataBody)
         res.status(201).json(result)
     } catch (error) {
+        console.log(req.body)
         res.status(404).json({ error: error.message });
     }
 }
