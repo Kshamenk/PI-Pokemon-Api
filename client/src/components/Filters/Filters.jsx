@@ -3,8 +3,8 @@ import style from './Filters.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 //created puede ser un parametro, if cF tirnr api ::: trae from api, else, traer los de la dbb   ()
 export default function Filters() {
-    const pokeFilter = useSelector((state)=> state.allPokemons)
-    console.log(pokeFilter)
+    const allPokemons = useSelector((state)=> state.allPokemons)
+    
     const dispatch = useDispatch()
 
 
@@ -21,7 +21,7 @@ export default function Filters() {
                 <option value="">Api</option>  
                 <option value="">Dbb</option>
             </select>
-            <button onClick={handlerSelect}>True</button>
+            <button onClick={handlerSelect}>Filtrar</button>
         </div>
     )
 }

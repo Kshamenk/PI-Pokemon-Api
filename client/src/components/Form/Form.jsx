@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Form.module.css';
-import { getAllTpyes } from '../../redux/actions';
+import {  getAllTpyes } from '../../redux/actions';
 import axios from 'axios';
 
 
@@ -51,8 +51,9 @@ export default function Form() {
   const handlerSubmit = (event) =>{
     //todos los submit necesitan un prevDefault
     event.preventDefault()
-   axios.post("http://localhost:3001/pokemons", input)
+    axios.post("http://localhost:3001/pokemons", input)
     alert("Personaje creado")
+    /*
     setInput({
       name: "",
       hp: "",
@@ -63,7 +64,8 @@ export default function Form() {
       speed: "",
       image: "",
       types: []
-    })
+    });
+    */
   }
 
   return (
