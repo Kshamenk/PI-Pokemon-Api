@@ -12,17 +12,7 @@ export default function Home() {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
-  // const [input, setInput] = useState('')
-
-  // const handlerChange = (event) => {
-  //   const value = event.target.value
-  //   setInput(value)
-  // }
-
-  // const handlerSubmit = (event) => {
-  //   event.preventDefault()
-  //   dispatch(pokemonByName(input))
-  // }
+  
 
   return (
     <div className={style.container}>
