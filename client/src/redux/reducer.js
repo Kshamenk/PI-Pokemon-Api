@@ -42,11 +42,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         allPokemons: action.payload,
       };
-    // case GET_POKE_SOURCE:
-    //   return {
-    //     ...state,
-    //     allPokemons: action.payload,
-    //   };
+    
     default:
       return { ...state };
   }
