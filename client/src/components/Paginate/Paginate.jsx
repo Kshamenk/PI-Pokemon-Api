@@ -1,21 +1,39 @@
 import style from './Paginate.module.css'
 
-export default function Paginate({currentPage, totalPages, onPageChange}) {
+export default function Paginate({ currentPage, itemsPerPage, totalItems, onPageChange }) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    const pageNumbers = Array.from({length: totalPages}, (_, i) => i + 1);
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            onPageChange(currentPage - 1);
+        }
+    };
 
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            onPageChange(currentPage + 1);
+        }
+    };
 
-    return(
-        <div className={style.container} >
-            {pageNumbers.map((pageNumber)=>(
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            onPageChange(pageNumber);
+        }
+    };
+
+    return (
+        <div className={style.container}>
+            <button onClick={handlePreviousPage}>&lt;</button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
                 <button
-                  key={pageNumber}
-                  onClick={()=> onPageChange(pageNumber)}
-                  className={pageNumber === currentPage ? style.active : "" }
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={pageNumber === currentPage ? style.active : ""}
                 >
                     {pageNumber}
                 </button>
             ))}
+            <button onClick={handleNextPage}>&gt;</button>
         </div>
     )
 }

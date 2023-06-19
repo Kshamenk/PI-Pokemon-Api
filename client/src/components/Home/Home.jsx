@@ -7,6 +7,8 @@ import { getAllPokemons } from "../../redux/actions";
 export default function Home() {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.allPokemons)
+
+
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 12;
 
@@ -14,17 +16,15 @@ export default function Home() {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
+  //funcion que sabe cambiar de pagina
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
+
   const indexLastItem = currentPage * itemsPerPage
   const indexFirstItem = indexLastItem - itemsPerPage
   const currentItems = allPokemons.slice(indexFirstItem, indexLastItem)
 
-  //calculo la cantidad total de paginasss
-  const totalPages = Math.ceil(allPokemons.length / itemsPerPage)
-
-  //funcion que sabe cambiar de pagina
-  const handlePage = (pageNumber) => {
-    setCurrentPage(pageNumber)
-  }
 
   return (
     <div className={style.container}>
@@ -32,11 +32,11 @@ export default function Home() {
       <div className={style.content}>
         <div className={style.cardsContainer}>
           <Paginate
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePage}
-          />
-          <CardsContainer  items={currentItems} />
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalItems={allPokemons.length}
+            onPageChange={handlePageChange} />
+          <CardsContainer items={currentItems} />
           <Footer />
         </div>
         <div className={style.aside}>
