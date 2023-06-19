@@ -1,9 +1,21 @@
 import style from './Paginate.module.css'
 
-export default function Paginate() {
+export default function Paginate({currentPage, totalPages, onPageChange}) {
+
+    const pageNumbers = Array.from({length: totalPages}, (_, i) => i + 1);
+
+
     return(
         <div className={style.container} >
-            <h3>1,2,3,4,5</h3>
+            {pageNumbers.map((pageNumber)=>(
+                <button
+                  key={pageNumber}
+                  onClick={()=> onPageChange(pageNumber)}
+                  className={pageNumber === currentPage ? style.active : "" }
+                >
+                    {pageNumber}
+                </button>
+            ))}
         </div>
     )
 }
