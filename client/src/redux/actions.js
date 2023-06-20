@@ -39,7 +39,7 @@ export const getAllPokemons = () => {
 
 export const getPokeCreated = (created) => {
     return async function (dispatch, getState) {
-      const allPokemons = getState().allPokemons;
+      const allPokemons = getState().allPokemonsCopy
       const createdPokemons = allPokemons.filter((poke) => poke.created === created);
       dispatch({ type: GET_POKE_CREATED, payload: createdPokemons });
     };

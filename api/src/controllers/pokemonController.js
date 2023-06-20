@@ -29,7 +29,7 @@ const getAllPokeController = async () => {
    };
   // traer desde la api
   const response = await axios.get(
-    "https://pokeapi.co/api/v2/pokemon?limit=50"
+    "https://pokeapi.co/api/v2/pokemon?limit=60"
   );
   const results = response.data.results;
   const result2 = results.map((e) => axios.get(e.url));

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getAllPokemons, getPokeCreated } from '../../redux/actions'
 import style from './Filters.module.css'
 import { useDispatch } from 'react-redux'
-//created puede ser un parametro, if cF tirnr api ::: trae from api, else, traer los de la dbb   ()
+
 export default function Filters() {
     //const allPokemons = useSelector((state)=> state.allPokemons)
     //console.log(allPokemons)
@@ -18,11 +18,7 @@ export default function Filters() {
           dispatch(getPokeCreated(event.target.value === 'dbb'));
         }
       };
-    // const handlerSelect = (event) => {
-    //     event.preventDefault()
-    //     dispatch(getPokeCreated(true))
-    // }
-
+    
 
     return (
         <div className={style.container}>

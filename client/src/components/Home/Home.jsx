@@ -1,29 +1,17 @@
 import style from "./Home.module.css";
-import { Aside, CardsContainer, Footer, Paginate, SearchBar } from "../index";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Aside, CardsContainer, Footer, SearchBar } from "../index";
+import { useEffect } from "react";
+import { useDispatch  } from "react-redux";
 import { getAllPokemons } from "../../redux/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const allPokemons = useSelector((state) => state.allPokemons)
+  
 
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 12;
 
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
-
-  //funcion que sabe cambiar de pagina
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber)
-  }
-
-  const indexLastItem = currentPage * itemsPerPage
-  const indexFirstItem = indexLastItem - itemsPerPage
-  const currentItems = allPokemons.slice(indexFirstItem, indexLastItem)
 
 
   return (
@@ -31,12 +19,7 @@ export default function Home() {
       <SearchBar />
       <div className={style.content}>
         <div className={style.cardsContainer}>
-          <Paginate
-            currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            totalItems={allPokemons.length}
-            onPageChange={handlePageChange} />
-          <CardsContainer items={currentItems} />
+          <CardsContainer />
           <Footer />
         </div>
         <div className={style.aside}>
