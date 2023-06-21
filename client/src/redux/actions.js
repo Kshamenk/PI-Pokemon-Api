@@ -16,38 +16,20 @@ export const getAllPokemons = () => {
     }
 };
 
+//localecompare() metodo muy similar al que usamos, casi que usa la misma logica que el sort, compara en orden alfabetico
+
 export const orderPokeByName = (orderName) => {
-    return async function (dispach, getState) {
-        const allPokemons = await getState().allPokemonsCopy
-        if (orderName === "a-z") {
-            allPokemons.sort( function (a, b) {
-                if (a.name > b.name) {
-                    return 1;
-                  }
-                  if (a.name < b.name) {
-                    return -1;
-                  }
-                  return 0;
-            })
-        } else {
-            if(orderName === "z-a") {
-                allPokemons.sort(function (a, b) {
-                    if (a.name < b.name) {
-                      return 1;
-                    }
-                    if (a.name > b.name) {
-                      return -1;
-                    }
-                    return 0;
-                  });
-            }
-            
-        }
-        dispach({ type: ORDER_POKE_BY_NAME, payload: allPokemons })
-    }
-}
-
-
+    return async function (dispatch, getState) {
+      const allPokemons = [...getState().allPokemons]; // necesito hacer una copia de mi pokemon originales, la guardo en un array, luego se mapea
+      let sortedPokemons;
+      if (orderName === "a-z") {
+        sortedPokemons = allPokemons.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (orderName === "z-a") {
+        sortedPokemons = allPokemons.sort((a, b) => b.name.localeCompare(a.name));
+      }
+      dispatch({ type: ORDER_POKE_BY_NAME, payload: sortedPokemons });
+    };
+  };
 
 export const getPokeCreated = (created) => {
     return async function (dispatch, getState) {
