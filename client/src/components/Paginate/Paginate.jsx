@@ -1,21 +1,30 @@
 import style from './Paginate.module.css'
 
-export default function Paginate({currentPage, totalPages, onPageChange}) {
+export default function Paginate({ pokePerPage, pokeActuales, setCurrentPage }) {
 
-    const pageNumbers = Array.from({length: totalPages}, (_, i) => i + 1);
+    
+    const totalPages = Math.ceil(pokeActuales / pokePerPage);
+    
+    const pageNumber = []
 
+    for (let i = 1; i <= totalPages; i++) {
+       pageNumber.push(i) 
+        
+    }
+    
 
-    return(
-        <div className={style.container} >
-            {pageNumbers.map((pageNumber)=>(
-                <button
-                  key={pageNumber}
-                  onClick={()=> onPageChange(pageNumber)}
-                  className={pageNumber === currentPage ? style.active : "" }
-                >
-                    {pageNumber}
-                </button>
-            ))}
+    return (
+        <div className={style.container}>
+            {
+                pageNumber && 
+                pageNumber.map((num)=> (
+                    
+                    <button key={num} onClick={()=>setCurrentPage(num)} >
+                        {num}
+                    </button>
+                ))
+            }
+
         </div>
     )
 }
