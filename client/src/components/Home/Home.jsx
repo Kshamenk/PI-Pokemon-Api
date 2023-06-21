@@ -7,7 +7,7 @@ import { getAllPokemons } from "../../redux/actions";
 export default function Home() {
   const dispatch = useDispatch();
   
-
+ 
 
   useEffect(() => {
     dispatch(getAllPokemons());
