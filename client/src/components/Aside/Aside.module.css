@@ -1,6 +1,6 @@
 
 
-
+/* 
 .container {
   display: flex;
   flex-direction: column;
@@ -12,6 +12,37 @@
   border: 2px solid #FFCB05;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: 'Arial', sans-serif;
+  color: #FFCB05;
+  text-transform: uppercase;
+}
+
+.container select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+  background-color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+  color: #333333;
+  margin-bottom: 10px;
+} */
+
+.container {
+  display: grid;
+  place-items: center;
+  width: 200px;
+  margin-left: auto;
+  padding: 10px;
+  background-color: #F6E8D9;
+  
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.288);
 }
 
 .container label {
