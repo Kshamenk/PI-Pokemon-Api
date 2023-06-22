@@ -22,3 +22,28 @@
     background-color: #FFFFFF;
     color: #FF3355;
   }
+
+  /* .container {
+    display: grid;
+    place-items: center;
+    background-color: #FF3355;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  label {
+    font-weight: bold;
+    color: #FFCB05;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #FFCB05;
+    background-color: #FFFFFF;
+    color: #FF3355;
+  } */
