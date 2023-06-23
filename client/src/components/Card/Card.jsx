@@ -10,7 +10,7 @@ export default function Card(props) {
     })
     return (
         <div key={id} className={style.container} >
-            <Link to ={`../detail/${id}`}>
+            <Link to ={`../detail/${id}`}  className={style.link}>
             <h3>{name}</h3>
             </Link>
             <img src={image} alt="" />

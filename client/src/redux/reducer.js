@@ -4,7 +4,8 @@ import {
   GET_POKEMON_BY_ID,
   GET_POKEMON_BY_NAME,
   GET_POKE_CREATED,
- ORDER_POKE_BY_NAME
+  ORDER_POKE_BY_NAME,
+  ORDER_POKE_BY_ATTACK
 } from "./actions";
 
 const initialState = {
@@ -42,7 +43,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         allPokemons: action.payload,
       };
-      case ORDER_POKE_BY_NAME:
+    case ORDER_POKE_BY_NAME:
+      return {
+        ...state,
+        allPokemons: action.payload,
+      };
+      case ORDER_POKE_BY_ATTACK:
       return {
         ...state,
         allPokemons: action.payload,

@@ -23,7 +23,7 @@ export default function SearchBar() {
         setFlag(false)
     };
 
-    
+
 
     const handlerSubmitAll = (event) => {
         event.preventDefault()
