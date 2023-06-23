@@ -25,8 +25,8 @@ const getAllPokeController = async () => {
   //traer desde dbb
   pokemonDbb = await Pokemon.findAll();
   if (pokeAll.length > 0) {
-     return [...pokemonDbb, ...pokeAll];
-   };
+    return [...pokemonDbb, ...pokeAll];
+  };
   // traer desde la api
   const response = await axios.get(
     "https://pokeapi.co/api/v2/pokemon?limit=60"
