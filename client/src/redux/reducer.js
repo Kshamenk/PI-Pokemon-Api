@@ -5,7 +5,8 @@ import {
   GET_POKEMON_BY_NAME,
   GET_POKE_CREATED,
   ORDER_POKE_BY_NAME,
-  ORDER_POKE_BY_ATTACK
+  ORDER_POKE_BY_ATTACK,
+  ORDER_POKE_BY_TYPE
 } from "./actions";
 
 const initialState = {
@@ -53,7 +54,26 @@ export default function reducer(state = initialState, action) {
         ...state,
         allPokemons: action.payload,
       };
+      case ORDER_POKE_BY_TYPE:
+      return {
+        ...state,
+        allPokemons: action.payload,
+      };
     default:
       return { ...state };
   }
 }
+
+
+
+
+
+
+
+
+
+// {pokemonTypes.map((type) => (
+//   <option value={type} key={type}>
+//     {type}
+//   </option>
+// ))}
