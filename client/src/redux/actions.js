@@ -7,12 +7,15 @@ export const GET_ALL_TYPES = "GET_ALL_TYPES"
 export const GET_POKE_CREATED = "GET_POKE_CREATED"
 export const ORDER_POKE_BY_NAME = "ORDER_POKE_BY_NAME"
 export const ORDER_POKE_BY_ATTACK = "ORDER_POKE_BY_ATTACK"
+export const ORDER_POKE_BY_TYPE = "ORDER_POKE_BY_TYPE"
 
 
+var pookeCache 
 
 export const getAllPokemons = () => {
   return async function (dispatch) {
     const pokemons = (await axios.get("http://localhost:3001/pokemons")).data
+    pookeCache = pokemons;
     dispatch({ type: GET_ALL_POKEMONS, payload: pokemons })
   }
 };
@@ -64,6 +67,23 @@ export const orderPokeByAttack = (orderAttack) => {
   
 }
 
+
+export const orderPokeByType = (selectedType) => {
+  return async function (dispatch, ) {
+     const allPokemons = pookeCache
+    
+    let filteredPokemons;
+    if (selectedType === "All Types") {
+      filteredPokemons = allPokemons; //  mostrar todos los pokemones
+    } else {
+      filteredPokemons = allPokemons.filter((pokemon) =>
+        pokemon.types.includes(selectedType)
+        );
+    }
+    dispatch({ type: ORDER_POKE_BY_TYPE, payload: filteredPokemons });
+  };
+};
+
 export const getPokeCreated = (created) => {
   return async function (dispatch, getState) {
     const allPokemons = getState().allPokemonsCopy
@@ -72,7 +92,7 @@ export const getPokeCreated = (created) => {
   };
 };
 
-export const getAllTpyes = () => {
+export const getAllTypes = () => {
   return async function (dispatch) {
     const types = (await axios.get('http://localhost:3001/types')).data
     dispatch({ type: GET_ALL_TYPES, payload: types })
