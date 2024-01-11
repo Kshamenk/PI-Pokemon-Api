@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 var https = require('https');
+var fs = require("fs")
 
 // Syncing all the models at once.
 conn.sync({ alter: false }).then(() => {    // cambiar a alter cuando este listo
