@@ -50,7 +50,7 @@ export default function Form() {
   const handlerSubmit = (event) => {
     //todos los submit necesitan un prevDefault
     event.preventDefault();
-    axios.post("http://localhost:3001/pokemons", input);
+    axios.post("164.92.70.131:5001/pokemons", input);
     alert("Personaje creado");
     /*
     setInput({
