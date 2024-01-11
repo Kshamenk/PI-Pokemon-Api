@@ -19,9 +19,17 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+var https = require('https');
 
 // Syncing all the models at once.
 conn.sync({ alter: false }).then(() => {    // cambiar a alter cuando este listo
+
+  console.log("Starting HTTPS server");
+  var serverI = https.createServer({
+    key: fs.readFileSync("/etc/letsencrypt/live/kcha.dev/privkey.pem", 'utf8'),
+    cert: fs.readFileSync("/etc/letsencrypt/live/kcha.dev/fullchain.pem", 'utf8')
+  }, server);
+
   server.listen(5001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
