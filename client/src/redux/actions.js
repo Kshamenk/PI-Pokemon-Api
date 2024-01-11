@@ -14,7 +14,7 @@ var pookeCache
 
 export const getAllPokemons = () => {
   return async function (dispatch) {
-    const pokemons = (await axios.get("http://164.92.70.131:5001/pokemons")).data
+    const pokemons = (await axios.get("https://pokeapi.kcha.dev/pokemons")).data
     pookeCache = pokemons;
     dispatch({ type: GET_ALL_POKEMONS, payload: pokemons })
   }
@@ -94,21 +94,21 @@ export const getPokeCreated = (created) => {
 
 export const getAllTypes = () => {
   return async function (dispatch) {
-    const types = (await axios.get('http://164.92.70.131:5001/types')).data
+    const types = (await axios.get('https://pokeapi.kcha.dev/types')).data
     dispatch({ type: GET_ALL_TYPES, payload: types })
   }
 }
 
 export const getPokemonById = (id) => {
   return async function (dispatch) {
-    const pokemon = (await axios.get(`http://164.92.70.131:5001/pokemons/${id}`)).data
+    const pokemon = (await axios.get(`https://pokeapi.kcha.dev/pokemons/${id}`)).data
     dispatch({ type: GET_POKEMON_BY_ID, payload: pokemon })
   }
 }
 
 export const getPokemonByName = (name) => {
   return async function (dispatch) {
-    const pokemon = (await axios.get(`http://164.92.70.131:5001/pokemons/?name=${name}`)).data
+    const pokemon = (await axios.get(`https://pokeapi.kcha.dev/pokemons/?name=${name}`)).data
     dispatch({ type: GET_POKEMON_BY_NAME, payload: pokemon })
   }
 }
