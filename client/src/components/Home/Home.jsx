@@ -7,12 +7,9 @@ import { getAllPokemons } from "../../redux/actions";
 export default function Home() {
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     dispatch(getAllPokemons());
   }, [dispatch]);
-
 
   return (
     <div className={style.container}>
@@ -29,4 +26,3 @@ export default function Home() {
     </div>
   );
 }
-

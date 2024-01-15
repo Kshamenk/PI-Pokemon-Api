@@ -50,13 +50,10 @@ export default function Orders() {
         <option value="menor">Menos fuerza</option>
       </select>
 
-
-
       <label htmlFor="orderType">Type Orders</label>
       <select
         name="orderType"
         id="orderType"
-        
         onChange={(e) => handleTypeChange(e.target.value)}
       >
         <option value="All Types">All Types</option>

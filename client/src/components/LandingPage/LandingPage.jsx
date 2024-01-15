@@ -1,10 +1,7 @@
-
-
-
-import pokemonImage from '../../Img/pokemon.jpg';
-import React from 'react';
-import style from './LandingPage.module.css';
-import { Link } from 'react-router-dom';
+import pokemonImage from "../../Img/pokemon.jpg";
+import React from "react";
+import style from "./LandingPage.module.css";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
